@@ -5,10 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { ExpenseService } from './expense.service';
+import { NewExpenseComponent } from './new-expense/new-expense.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NewExpenseComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
 import { Expense } from './expense';
 
-export const EXPENSES: Expense[] = [
-    { date: '4/7/17', description: 'KazuNori dinner', cost: 30 },
-    { date: '4/9/17', description: 'Nice Coffee', cost: 5 },
-    { date: '5/12/17', description: 'Vacation ticket to Hawaii', cost: 600 },
-    { date: '5/29/17', description: 'Grand Central Market lunch', cost: 10 }
+export const allExpenses: Expense[] = [
+    { id: 1, date: '2017-06-01', description: 'Dinner at KazuNori', cost: 30 },
+    { id: 2, date: '2017-06-03', description: 'Nice Coffee', cost: 5 },
+    { id: 3, date: '2017-06-15', description: 'Vacation ticket to Hawaii', cost: 600 },
+    { id: 4, date: '2017-06-18', description: 'Spotify subscription', cost: 10 }
 ]
