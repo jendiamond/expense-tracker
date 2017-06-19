@@ -19,6 +19,18 @@ export class ExpenseService {
     )
   }
 
+  getNextId(): number {
+    var highest = 0;
+
+    for (var i = 0; i < allExpenses.length; i++) {
+      if (i > highest) {
+        highest = i;
+      }
+    } 
+
+    return highest + 1;
+  }
+
   removeExpense(expense: Expense): void {
     this.getExpenses().then(expenses => {
       const index = expenses.indexOf(expense);

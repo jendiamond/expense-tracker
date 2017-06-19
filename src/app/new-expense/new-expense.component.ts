@@ -31,7 +31,7 @@ export class NewExpenseComponent implements OnInit {
 
   addExpense() {
     this.expenseService.addExpense({
-      id: 5,
+      id: this.expenseService.getNextId(),
       date: this.date,
       description: this.description,
       cost: this.cost
