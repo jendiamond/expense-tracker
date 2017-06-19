@@ -9,21 +9,20 @@ import { ExpenseService } from '../expense.service';
       <label>Date</label>
       <input type='date' name='date' [(ngModel)]='date'>
       <label>Description</label>
-      <input type='text' name='desc' [(ngModel)]='desc'>
+      <input type='text' name='description' [(ngModel)]='description'>
       <label>Cost</label>
       <input type='number' name='cost' [(ngModel)]='cost'>
       <button>Submit</button>
     </form>
-
   `,
   styles: []
 })
 export class NewExpenseComponent implements OnInit {
-  @Output() updateTotal = new EventEmitter();
-
+  cost;
   date = '';
-  desc = '';
-  cost = 0;
+  description = '';
+
+  @Output() updateTotal = new EventEmitter();
 
   constructor(private expenseService: ExpenseService) { }
 
@@ -34,9 +33,13 @@ export class NewExpenseComponent implements OnInit {
     this.expenseService.addExpense({
       id: 5,
       date: this.date,
-      description: this.desc,
+      description: this.description,
       cost: this.cost
     });
+
+    this.cost = '';
+    this.date = '';
+    this.description = '';
 
     this.updateTotal.emit();
   }

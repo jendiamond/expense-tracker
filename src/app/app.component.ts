@@ -1,55 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { Expense } from './expense';
+import { ExpensesComponent } from './expenses/expenses.component';
 import { ExpenseService } from './expense.service';
 
 @Component({
   selector: 'root',
   template: `
-    <div>
-      {{title}}
-    </div>
-
-    <ul>
-      <li *ngFor='let expense of expenses'>
-        <p>{{expense.date}}</p>
-        <p>{{expense.description}}</p>
-        <p>$<span>{{expense.cost}}</span></p>
-        <button (click)=deleteExpense(expense)>Remove</button>
-      </li>
-    </ul>
-
-    <p>Total: $<span>{{total}}</span></p>
-
-    <new-expense (updateTotal)=calculateTotal()></new-expense>
-  `
+    <h1>{{title}}</h1>
+    <expenses (updateTotal)=calculateTotal()></expenses>
+    <p *ngIf='total > 0'>Total: $<span>{{total}}</span></p>
+    <p *ngIf='total === 0'>Whoa, no expenses?</p>
+    <button (click)='toggleNewExpenseForm()'>{{isHidden ? 'Show' : 'Hide'}} expense form</button>
+    <new-expense (updateTotal)=calculateTotal() [ngClass]='{hide_element: isHidden}'></new-expense>
+  `,
+  styles: [
+    '.hide_element { display: none; }'
+  ]
 })
 export class AppComponent implements OnInit {
   title = 'Because it costs to be the boss';
   total;
-  expenses; 
+  isHidden = true;
 
   constructor(private expenseService: ExpenseService) {}
 
   ngOnInit() {
-    this.getExpenses();
     this.calculateTotal();
   }
-
-  getExpenses() {
-    this.expenseService.getExpenses()
-      .then(expenses => this.expenses = expenses);
-  }
-
+ 
   calculateTotal() {
     this.total = 0;
 
-    this.expenseService.getExpenses()
-      .then(expenses => expenses.forEach(expense => this.total += expense.cost)); 
+    this.expenseService.getExpenses().then(expenses => 
+      expenses.forEach(expense => 
+        this.total += expense.cost)); 
   }
 
-  deleteExpense(expense: Expense) {
-    this.expenseService.removeExpense(expense);
-
-    this.calculateTotal();
+  toggleNewExpenseForm() {
+    this.isHidden = !this.isHidden;
   }
 }

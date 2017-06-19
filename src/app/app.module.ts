@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 
 import { ExpenseService } from './expense.service';
 import { NewExpenseComponent } from './new-expense/new-expense.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewExpenseComponent
+    NewExpenseComponent,
+    ExpensesComponent
   ],
   imports: [
     BrowserModule,
