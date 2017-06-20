@@ -6,7 +6,7 @@ import { ExpenseService } from './expense.service';
   selector: 'root',
   template: `
     <h1>{{title}}</h1>
-    <expenses (getExpense)=setExpense($event)></expenses>
+    <expenses (updateTotal)=calculateTotal() (getExpense)=setExpense($event)></expenses>
     <p *ngIf='total > 0'>Total: $<span>{{total}}</span></p>
     <p *ngIf='total === 0'>Whoa, no expenses?</p>
     <button (click)='toggleNewExpenseForm()'>{{isHidden ? 'Add' : 'Cancel'}} new expense</button>
