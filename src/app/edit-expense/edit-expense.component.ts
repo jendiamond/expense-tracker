@@ -15,16 +15,23 @@ import { ExpenseService } from '../expense.service';
       <label>Cost</label>
       <input type='number' name='cost' [(ngModel)]='selectedExpense.cost'>
       <button>Update</button>
+      <button (click)='cancel()'>X</button>
     </form>
   `
 })
 export class EditExpenseComponent { 
+
   @Input() selectedExpense: Expense;
   @Output() updateExpense = new EventEmitter();
+  @Output() cancelExpense = new EventEmitter();
 
   constructor(private expenseService: ExpenseService) {}
 
   editExpense() {
     this.updateExpense.emit();
+  }
+
+  cancel() {
+    this.cancelExpense.emit();
   }
 }

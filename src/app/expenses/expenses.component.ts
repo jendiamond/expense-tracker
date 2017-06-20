@@ -5,17 +5,23 @@ import { ExpenseService } from '../expense.service';
 @Component({
   selector: 'expenses',
   template: `
-    <ul>
-      <li *ngFor='let expense of expenses'>
-        <p>{{expense.date}}</p>
-        <p>{{expense.description}}</p>
-        <p>$<span>{{expense.cost}}</span></p>
-        <button (click)=deleteExpense(expense)>Delete</button>
-        <button (click)=editExpense(expense)>Edit</button>
+    <ul class='col-xs-12'>
+      <li *ngFor='let expense of expenses' class='row expense'>
+        <p class='col-xs-12 col-md-3'>{{expense.date}}</p>
+        <p class='col-xs-7 col-md-5'>{{expense.description}}</p>
+        <p class='col-xs-2 col-md-2'>$<span>{{expense.cost}}</span></p>
+        <div class='col-xs-3 col-md-2 icons-container'>
+          <div (click)=deleteExpense(expense) class='remove-icon'></div>
+          <div (click)=editExpense(expense) class='edit-icon'></div>
+        </div>
       </li>
     </ul>
   `,
-  styles: []
+  styles: [`
+    ul {
+      list-style-type: none;
+    }
+  `]
 })
 export class ExpensesComponent implements OnInit {
   isHidden;

@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+h3 {
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+h4 {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+p {
+    font-size: 24px;
+}
+
+.expense {
+    border-bottom: 2px solid blueviolet;
+    padding-top: 20px;
+}
+
+.icons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-icon {
+    background-image: url('/assets/delete-icon.png');
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
+
+.edit-icon {
+    background-image: url('/assets/edit-icon.png');
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+}
+
+.add-icon {
+    background-image: url('/assets/delete-icon.png');
+    background-size: cover;
+    height: 60px;
+    width: 60px;
+    margin-right: 20px;
+    transform: rotate(45deg);
+}

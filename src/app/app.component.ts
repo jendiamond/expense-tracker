@@ -5,14 +5,33 @@ import { ExpenseService } from './expense.service';
 @Component({
   selector: 'root',
   template: `
-    <h1>{{title}}</h1>
-    <expenses (updateTotal)=calculateTotal() (getExpense)=setExpense($event)></expenses>
-    <p *ngIf='total > 0'>Total: $<span>{{total}}</span></p>
-    <p *ngIf='total === 0'>Whoa, no expenses?</p>
-    <button (click)='toggleNewExpenseForm()'>{{isHidden ? 'Add' : 'Cancel'}} new expense</button>
-    <new-expense (updateTotal)=addExpense() [ngClass]='{hidden: isHidden}'></new-expense>
-    <div *ngIf='expense'>
-      <edit-expense (updateExpense)=updateExpense() [selectedExpense]='expense'></edit-expense>
+    <div class='container'>
+      <h1 class='row text-center'>{{title}}</h1>
+      <h3 class='row text-center'>{{subtitle}}</h3>
+      <expenses (updateTotal)=calculateTotal() 
+                (getExpense)=setExpense($event) 
+                class='row'></expenses>
+      <div class='row text-center'>
+        <h3 *ngIf='total > 0' class='col-xs-12'>
+          Total: $<span>{{total}}</span>
+        </h3>
+        <h3 *ngIf='total === 0' class='col-xs-12'>
+          Whoa, no expenses?
+        </h3>
+      </div>
+      <div (click)='toggleNewExpenseForm()' 
+            class='row text-center icon-container'>
+        <div class='add-icon'></div>
+        <h4 class=''>{{isHidden ? 'Add' : 'Cancel'}} new expense</h4>
+      </div>
+      <new-expense (updateTotal)=addExpense() 
+                  [ngClass]='{hidden: isHidden}'
+                  class='row text-center'></new-expense>
+      <div *ngIf='expense' class='row'>
+        <edit-expense (updateExpense)=updateExpense() 
+                      (cancelExpense)=setExpense(null)
+                      [selectedExpense]='expense'></edit-expense>
+      </div>
     </div>
   `,
   styles: [`
@@ -21,7 +40,8 @@ import { ExpenseService } from './expense.service';
 })
 export class AppComponent implements OnInit {
   expense;
-  title = 'Because it costs to be the boss';
+  title = 'Costs to be the #Bawse';
+  subtitle = 'My expense tracking app';
   total;
   isHidden = true;
 
@@ -43,13 +63,13 @@ export class AppComponent implements OnInit {
     this.isHidden = !this.isHidden;
   }
 
-  setExpense(expense) {
-    this.expense = expense;
+  setExpense(value) {
+    this.expense = value;
   }
 
   updateExpense() {
     this.calculateTotal();
-    this.expense = null;
+    this.setExpense(null);
   }
 
   addExpense() {
