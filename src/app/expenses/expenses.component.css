@@ -1,0 +1,31 @@
+ul {
+    list-style-type: none;
+}
+
+.expense {
+    border-bottom: 2px solid blueviolet;
+    padding-top: 20px;
+}
+
+.icons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.remove-icon {
+    background-image: url('/assets/delete-icon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
+
+.edit-icon {
+    background-image: url('/assets/edit-icon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+}

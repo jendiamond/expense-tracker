@@ -1,0 +1,21 @@
+<div class='container'>
+    <h1 class='row text-center'>{{title}}</h1>
+    <h4 class='row text-center'>{{subtitle}}</h4>
+    <expenses (updateTotal)=calculateTotal() (getExpense)=setExpense($event) class='row'></expenses>
+    <div class='row text-center'>
+        <h4 *ngIf='total > 0' class='col-xs-12'>
+            Total: $<span>{{total}}</span>
+        </h4>
+        <h4 *ngIf='total === 0' class='col-xs-12'>
+            Whoa, no expenses?
+        </h4>
+    </div>
+    <div (click)='toggleNewExpenseForm()' class='row text-center icon-container'>
+        <div class='add-icon'></div>
+        <h3 class=''>{{isHidden ? 'Add' : 'Cancel'}} new expense</h3>
+    </div>
+    <new-expense (updateTotal)=addExpense() [ngClass]='{hidden: isHidden}' class='row text-center'></new-expense>
+    <div *ngIf='expense' class='row'>
+        <edit-expense (updateExpense)=updateExpense() (cancelExpense)=setExpense(null) [selectedExpense]='expense'></edit-expense>
+    </div>
+</div>

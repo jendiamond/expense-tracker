@@ -17,11 +17,7 @@ import { ExpenseService } from '../expense.service';
       </li>
     </ul>
   `,
-  styles: [`
-    ul {
-      list-style-type: none;
-    }
-  `]
+  styleUrls: ['expenses.component.css']
 })
 export class ExpensesComponent implements OnInit {
   isHidden;
