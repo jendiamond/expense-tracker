@@ -6,13 +6,26 @@ import { ExpenseService } from '../expense.service';
   selector: 'expenses',
   template: `
     <ul class='col-xs-12'>
+      <li class='row'>
+        <p class='col-xs-3'>Date</p>
+        <p class='col-xs-5'>Description</p>
+        <p class='col-xs-3'>Cost</p>
+      </li>
+    </ul>
+    <ul class='col-xs-12'>
       <li *ngFor='let expense of expenses' class='row expense'>
-        <p class='col-xs-12 col-md-3'>{{expense.date}}</p>
-        <p class='col-xs-7 col-md-5'>{{expense.description}}</p>
-        <p class='col-xs-2 col-md-2'>$<span>{{expense.cost}}</span></p>
-        <div class='col-xs-3 col-md-2 icons-container'>
-          <div (click)=deleteExpense(expense) class='remove-icon'></div>
-          <div (click)=editExpense(expense) class='edit-icon'></div>
+        <div *ngIf='expense.editing'>
+          <edit-expense (updateExpense)=updateExpense(expense) 
+                        [selectedExpense]='expense'></edit-expense>
+        </div>
+        <div *ngIf='!expense.editing'>
+          <p class='col-xs-12 col-md-3'>{{expense.date}}</p>
+          <p class='col-xs-7 col-md-5'>{{expense.description}}</p>
+          <p class='col-xs-2'>$<span>{{expense.cost}}</span></p>
+          <div class='col-xs-3 col-md-2 icons-container'>
+            <div (click)=deleteExpense(expense) class='remove-icon'></div>
+            <div (click)=editExpense(expense) class='edit-icon'></div>
+          </div>
         </div>
       </li>
     </ul>
@@ -20,11 +33,9 @@ import { ExpenseService } from '../expense.service';
   styleUrls: ['expenses.component.css']
 })
 export class ExpensesComponent implements OnInit {
-  isHidden;
   expenses;
 
   @Output() updateTotal = new EventEmitter();
-  @Output() getExpense = new EventEmitter();
 
   constructor(private expenseService: ExpenseService) { }
 
@@ -38,7 +49,12 @@ export class ExpensesComponent implements OnInit {
   }
 
   editExpense(expense: Expense) {
-    this.getExpense.emit(expense);
+    expense.editing = true;
+  }
+
+  updateExpense(expense: Expense) {
+    expense.editing = false;
+    this.updateTotal.emit();
   }
 
   findAllExpenses() {

@@ -1,0 +1,15 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-icon {
+    background-image: url('/assets/update-icon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+}
+

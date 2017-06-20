@@ -4,25 +4,21 @@ import { ExpenseService } from '../expense.service';
 @Component({
   selector: 'new-expense',
   template: `
-    <form (submit)='addExpense()'>
-      <p>New Expense</p>
-      <label>Date</label>
+    <form (submit)='addExpense()' class='form-container'>
       <input type='date' name='date' [(ngModel)]='date'>
-      <label>Description</label>
-      <input type='text' name='description' [(ngModel)]='description'>
-      <label>Cost</label>
-      <input type='number' name='cost' [(ngModel)]='cost'>
-      <button>Submit</button>
+      <input type='text' name='description' [(ngModel)]='description' placeholder='Description'>
+      <input type='number' name='cost' [(ngModel)]='cost' placeholder='Cost'>
+      <div (click)='addExpense()' class='submit-icon'></div>
     </form>
   `,
-  styles: []
+  styleUrls: ['new-expense.component.css']
 })
 export class NewExpenseComponent implements OnInit {
   cost;
   date = '';
   description = '';
 
-  @Output() updateTotal = new EventEmitter();
+  @Output() calculateTotalAndToggleForm = new EventEmitter();
 
   constructor(private expenseService: ExpenseService) { }
 
@@ -34,13 +30,14 @@ export class NewExpenseComponent implements OnInit {
       id: this.expenseService.getNextId(),
       date: this.date,
       description: this.description,
-      cost: this.cost
+      cost: this.cost,
+      editing: false
     });
 
     this.cost = '';
     this.date = '';
     this.description = '';
 
-    this.updateTotal.emit();
+    this.calculateTotalAndToggleForm.emit();
   }
 }

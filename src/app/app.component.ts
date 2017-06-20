@@ -8,7 +8,6 @@ import { ExpenseService } from './expense.service';
   styleUrls: ['app.component.css']
 })
 export class AppComponent implements OnInit {
-  expense;
   title = 'Costs to be the #Bawse';
   subtitle = 'My expense tracking app';
   total;
@@ -32,16 +31,7 @@ export class AppComponent implements OnInit {
     this.isHidden = !this.isHidden;
   }
 
-  setExpense(value) {
-    this.expense = value;
-  }
-
-  updateExpense() {
-    this.calculateTotal();
-    this.setExpense(null);
-  }
-
-  addExpense() {
+  calculateTotalAndToggleForm() {
     this.calculateTotal();
     this.toggleNewExpenseForm();
   }

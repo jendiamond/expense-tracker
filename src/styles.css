@@ -17,6 +17,6 @@ h3 {
     font-weight: 800;
 }
 
-p {
+p, input {
     font-size: 24px;
 }

@@ -5,19 +5,19 @@ import { ExpenseService } from '../expense.service';
 @Component({
   selector: 'edit-expense',
   template: `
-    <form (submit)=editExpense()>
-      <p>Edit Expense</p>
-      <label>Date</label>
-      <label>id: </label>{{selectedExpense.id}}
-      <input type='date' name='date' [(ngModel)]='selectedExpense.date'>
-      <label>Description</label>
-      <input type='text' name='description' [(ngModel)]='selectedExpense.description'>
-      <label>Cost</label>
-      <input type='number' name='cost' [(ngModel)]='selectedExpense.cost'>
-      <button>Update</button>
-      <button (click)='cancel()'>X</button>
+    <form class='row edited-row'>
+      <input type='date' name='date' [(ngModel)]='selectedExpense.date'
+                                     class='col-xs-12 col-md-3'>
+      <input type='text' name='description' [(ngModel)]='selectedExpense.description'
+                                            class='col-xs-7 col-md-5'>
+      <input type='number' name='cost' [(ngModel)]='selectedExpense.cost'
+                                       class='col-xs-2'>
+      <div class='col-xs-3 col-md-2 icons-container'>
+        <div (click)=editExpense() class='update-icon'></div>
+      </div>
     </form>
-  `
+  `,
+  styleUrls: ['edit-expense.component.css']
 })
 export class EditExpenseComponent { 
 
@@ -29,9 +29,5 @@ export class EditExpenseComponent {
 
   editExpense() {
     this.updateExpense.emit();
-  }
-
-  cancel() {
-    this.cancelExpense.emit();
   }
 }
