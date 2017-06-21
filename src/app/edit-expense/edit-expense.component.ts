@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Expense } from '../expense';
-import { ExpenseService } from '../expense.service';
+import { Expense } from '../data/expense';
+import { ExpenseService } from '../expense-service/expense.service';
 
 @Component({
   selector: 'edit-expense',
@@ -23,7 +23,6 @@ export class EditExpenseComponent {
 
   @Input() selectedExpense: Expense;
   @Output() updateExpense = new EventEmitter();
-  @Output() cancelExpense = new EventEmitter();
 
   constructor(private expenseService: ExpenseService) {}
 

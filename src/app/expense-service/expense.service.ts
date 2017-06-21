@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Expense } from './expense';
-import { allExpenses } from './mock-expenses';
+import { Expense } from '../data/expense';
+import { allExpenses } from '../data/mock-expenses';
 
 @Injectable()
 export class ExpenseService {
@@ -19,16 +19,11 @@ export class ExpenseService {
     )
   }
 
-  getNextId(): number {
-    var highest = 0;
-
-    for (var i = 0; i < allExpenses.length; i++) {
-      if (i > highest) {
-        highest = i;
-      }
-    } 
-
-    return highest + 1;
+  getNextId(): Promise<number> {
+    return this.findAllExpenses().then(expenses => {
+      const expenseIds = expenses.map(expense => expense.id)
+      return Math.max.apply(null, expenseIds) + 1;
+    });
   }
 
   removeExpense(expense: Expense): void {
@@ -45,6 +40,7 @@ export class ExpenseService {
           e.cost = expense.cost;
           e.date = expense.date;
           e.description = expense.description;
+          e.editing = expense.editing;
         }       
       })
     );

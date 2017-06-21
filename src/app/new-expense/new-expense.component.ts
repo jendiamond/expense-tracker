@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ExpenseService } from '../expense.service';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { ExpenseService } from '../expense-service/expense.service';
 
 @Component({
   selector: 'new-expense',
@@ -13,7 +13,7 @@ import { ExpenseService } from '../expense.service';
   `,
   styleUrls: ['new-expense.component.css']
 })
-export class NewExpenseComponent implements OnInit {
+export class NewExpenseComponent {
   cost;
   date = '';
   description = '';
@@ -22,22 +22,24 @@ export class NewExpenseComponent implements OnInit {
 
   constructor(private expenseService: ExpenseService) { }
 
-  ngOnInit() {
-  }
-
   addExpense() {
-    this.expenseService.addExpense({
-      id: this.expenseService.getNextId(),
-      date: this.date,
-      description: this.description,
-      cost: this.cost,
-      editing: false
-    });
+    this.expenseService.getNextId().then(id => {
+      this.expenseService.addExpense({
+        id,
+        date: this.date,
+        description: this.description,
+        cost: this.cost,
+        editing: false
+      });
 
-    this.cost = '';
+      this.clearForm();
+      this.calculateTotalAndToggleForm.emit();
+    });
+  }
+  
+  clearForm() {
+    this.cost = 0;
     this.date = '';
     this.description = '';
-
-    this.calculateTotalAndToggleForm.emit();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Expense } from '../expense';
-import { ExpenseService } from '../expense.service';
+import { Expense } from '../data/expense';
+import { ExpenseService } from '../expense-service/expense.service';
 
 @Component({
   selector: 'expenses',

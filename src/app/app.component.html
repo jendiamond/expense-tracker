@@ -1,6 +1,6 @@
 <div class='container'>
     <h1 class='row text-center'>{{title}}</h1>
-    <h4 class='row text-center'>{{subtitle}}</h4>
+    <h4 class='row text-center'>{{subtitle | uppercase}}</h4>
     <expenses (updateTotal)=calculateTotal() class='row'></expenses>
     <div class='row text-center'>
         <h4 *ngIf='total > 0' class='col-xs-12'>
