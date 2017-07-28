@@ -6,13 +6,6 @@ import { ExpenseService } from '../expense-service/expense.service';
   selector: 'expenses',
   template: `
     <ul class='col-xs-12'>
-      <li class='row'>
-        <p class='col-xs-3'>Date</p>
-        <p class='col-xs-5'>Description</p>
-        <p class='col-xs-3'>Cost</p>
-      </li>
-    </ul>
-    <ul class='col-xs-12'>
       <li *ngFor='let expense of expenses' class='row expense'>
         <div *ngIf='expense.editing'>
           <edit-expense (updateExpense)=updateExpense(expense) 

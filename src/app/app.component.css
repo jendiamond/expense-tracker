@@ -1,3 +1,7 @@
+.title-container {
+    margin: 60px 0;
+}
+
 .hidden { 
     display: none; 
 }
@@ -19,4 +23,8 @@
 
 .rotate {
     transform: rotate(90deg);
+}
+
+ul {
+    list-style-type: none;
 }
